@@ -3,11 +3,16 @@
 # Do not use any of the built in array functions for this exercise
 class array:
     def __init__(self):
-        # Your code here
-        pass
-
+        # capacity of the array => how many elements can fit inside it
+        self.capacity = capacity
+        # occupied length of the array => how many elements are actually in the array
+        self.count = 0
+        # underlying data structure => array with elements
+        self.storage = [None] * capacity
 
 # Double the size of the given array
+
+
 def resize_array():
     # Your code here
     pass
