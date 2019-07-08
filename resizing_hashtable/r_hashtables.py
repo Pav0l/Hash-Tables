@@ -12,7 +12,7 @@ class HashTable:
         self.capacity = capacity
         self.storage = [None] * capacity
         self.count = 0
-        self.load_factor = self.count / self.capacity
+        # self.load_factor = self.count / capacity
 
 
 # Research and implement the djb2 hash function
@@ -29,10 +29,10 @@ def get_idx(hash_table, key):
 
 
 def hash_table_insert(hash_table, key, value):
-    arr_idx = get_idx(hash_table, key)
+    # if hash_table.load_factor >= 0.7:
+    #     hash_table = hash_table_resize(hash_table)
 
-    if hash_table.load_factor >= 0.7:
-        hash_table = hash_table_resize(hash_table)
+    arr_idx = get_idx(hash_table, key)
 
     # collision
     if hash_table.storage[arr_idx]:
@@ -43,6 +43,7 @@ def hash_table_insert(hash_table, key, value):
     else:
         hash_table.storage[arr_idx] = LinkedPair(key, value)
         hash_table.count += 1
+        # hash_table.load_factor = hash_table.count / hash_table.capacity
 
 
 # If you try to remove a value that isn't there, print a warning.
@@ -52,18 +53,33 @@ def hash_table_remove(hash_table, key):
 
 # Should return None if the key is not found.
 def hash_table_retrieve(hash_table, key):
-    pass
+    arr_idx = get_idx(hash_table, key)
+
+    # key does not exist in HT
+    if not hash_table.storage[arr_idx]:
+        return None
+    # key exist and there is NO collision
+    elif hash_table.storage[arr_idx].next == None:
+        return hash_table.storage[arr_idx].value
+    # key exist and there were collisons => search for key in LL
+    else:
+        head = hash_table.storage[arr_idx]
+        while head:
+            if head.key == key:
+                return head.value
+            head = hash_table.storage[arr_idx].next
 
 
 def hash_table_resize(hash_table):
     new_capacity = hash_table.capacity * 2
-    new_storage = [None] * hash_table.capacity
+    new_storage = [None] * new_capacity
 
     for i in range(hash_table.count):
         new_storage[i] = hash_table.storage[i]
 
     hash_table.storage = new_storage
     hash_table.capacity = new_capacity
+    # hash_table.load_factor = hash_table.count / new_capacity
 
     return hash_table
 
