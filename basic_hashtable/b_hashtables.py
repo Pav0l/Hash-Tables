@@ -50,7 +50,7 @@ def hash_table_retrieve(hash_table, key):
     if not hash_table.storage[arr_idx]:
         return None
     else:
-        return hash_table.storage[arr_idx]
+        return hash_table.storage[arr_idx].value
 
 
 def Testing():
