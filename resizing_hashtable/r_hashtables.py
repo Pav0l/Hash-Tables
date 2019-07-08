@@ -1,8 +1,4 @@
-
-
-# '''
 # Linked List hash table key/value pair
-# '''
 class LinkedPair:
     def __init__(self, key, value):
         self.key = key
@@ -10,53 +6,33 @@ class LinkedPair:
         self.next = None
 
 
-# '''
-# Fill this in
-
 # Resizing hash table
-# '''
 class HashTable:
     def __init__(self, capacity):
-        pass
+        self.capacity = capacity
+        self.storage = [None] * capacity
 
 
-# '''
 # Research and implement the djb2 hash function
-# '''
 def hash(string, max):
     pass
 
 
-# '''
-# Fill this in.
-
 # Hint: Used the LL to handle collisions
-# '''
 def hash_table_insert(hash_table, key, value):
     pass
 
 
-# '''
-# Fill this in.
-
 # If you try to remove a value that isn't there, print a warning.
-# '''
 def hash_table_remove(hash_table, key):
     pass
 
 
-# '''
-# Fill this in.
-
 # Should return None if the key is not found.
-# '''
 def hash_table_retrieve(hash_table, key):
     pass
 
 
-# '''
-# Fill this in
-# '''
 def hash_table_resize(hash_table):
     pass
 
