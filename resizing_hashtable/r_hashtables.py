@@ -30,6 +30,10 @@ def get_idx(hash_table, key):
 
 def hash_table_insert(hash_table, key, value):
     arr_idx = get_idx(hash_table, key)
+
+    if hash_table.load_factor >= 0.7:
+        hash_table_resize(hash_table)
+
     # collision
     if hash_table.storage[arr_idx]:
         print(
