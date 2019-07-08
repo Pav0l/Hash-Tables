@@ -51,7 +51,29 @@ def hash_table_insert(hash_table, key, value):
 
 # If you try to remove a value that isn't there, print a warning.
 def hash_table_remove(hash_table, key):
-    pass
+    arr_idx = get_idx(hash_table, key)
+
+    if not hash_table.storage[arr_idx]:
+        print('WARNING: The value you are trying to remove does not exist')
+        return None
+
+    # key exist and there is NO collision
+    elif hash_table.storage[arr_idx].next == None:
+        hash_table.storage[arr_idx] = None
+        hash_table.count -= 1
+    # key exist and there were collisons => search for key in LL
+    else:
+        head = hash_table.storage[arr_idx]
+        previous = head
+        while head:
+            if head.key == key:
+                head.key = None
+                head.value = None
+                previous.next = head.next
+                head.next = None
+                break
+            previous = head
+            head = hash_table.storage[arr_idx].next
 
 
 # Should return None if the key is not found.
@@ -106,14 +128,4 @@ def Testing():
           + " to " + str(new_capacity) + ".")
 
 
-# Testing()
-
-ht = HashTable(8)
-
-hash_table_insert(ht, "key-0", "val-0")
-hash_table_insert(ht, "key-1", "val-1")
-hash_table_insert(ht, "key-2", "val-2")
-
-hash_table_insert(ht, "key-0", "new-val-0")
-hash_table_insert(ht, "key-1", "new-val-1")
-hash_table_insert(ht, "key-2", "new-val-2")
+Testing()
