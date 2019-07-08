@@ -24,9 +24,14 @@ def hash(string):
     return prime
 
 
+# abstract away function to return an Index for hashed key
+def get_idx(hash_table, key):
+    return hash(key) % hash_table.capacity
+
+
 # If you are overwriting a value with a different key, print a warning.
 def hash_table_insert(hash_table, key, value):
-    arr_idx = hash(key) % hash_table.capacity
+    arr_idx = get_idx(hash_table, key)
     if hash_table.storage[arr_idx]:
         print(
             f'WARNING: Overwriting existing key: value pair.')
@@ -36,7 +41,7 @@ def hash_table_insert(hash_table, key, value):
 
 # If you try to remove a value that isn't there, print a warning.
 def hash_table_remove(hash_table, key):
-    arr_idx = hash(key) % hash_table.capacity
+    arr_idx = get_idx(hash_table, key)
     if not hash_table.storage[arr_idx]:
         print(f'Hash Table does not contain this key:value pair')
         return None
@@ -46,7 +51,7 @@ def hash_table_remove(hash_table, key):
 
 # Should return None if the key is not found.
 def hash_table_retrieve(hash_table, key):
-    arr_idx = hash(key) % hash_table.capacity
+    arr_idx = get_idx(hash_table, key)
     if not hash_table.storage[arr_idx]:
         return None
     else:
