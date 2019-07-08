@@ -39,16 +39,22 @@ def array_read(arr, idx):
 # Insert an element in a given array at a given index
 
 
-def array_insert():
+def array_insert(arr, element, idx):
     # Throw an error if array is out of the current count
-
+    if idx > arr.count:
+        print(f'IndexError: Index {idx} is out of range.')
+        return None
     # Resize the array if the number of elements is over capacity
-
+    if arr.capacity <= arr.count:
+        resize_array(arr)
     # Move the elements to create a space at 'index'
-    # Think about where to start!
+    for i in range(arr.count, idx, -1):
+        # arr.storage[i + 1] = arr.storage[i]
+        arr.storage[i] = arr.storage[i - 1]
 
     # Add the new element to the array and update the count
-    pass
+    arr.storage[idx] = element
+    arr.count += 1
 
 
 # Add an element to the end of the given array
