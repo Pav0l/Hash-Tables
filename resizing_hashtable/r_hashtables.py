@@ -11,6 +11,8 @@ class HashTable:
     def __init__(self, capacity):
         self.capacity = capacity
         self.storage = [None] * capacity
+        self.count = 0
+        self.load_factor = self.count / self.capacity
 
 
 # Research and implement the djb2 hash function
@@ -36,6 +38,7 @@ def hash_table_insert(hash_table, key, value):
     # no collision
     else:
         hash_table.storage[arr_idx] = LinkedPair(key, value)
+        hash_table.count += 1
 
 
 # If you try to remove a value that isn't there, print a warning.
@@ -49,7 +52,14 @@ def hash_table_retrieve(hash_table, key):
 
 
 def hash_table_resize(hash_table):
-    pass
+    new_capacity = hash_table.capacity * 2
+    new_storage = [None] * hash_table.capacity
+
+    for i in range(hash_table.count):
+        new_storage[i] = hash_table.storage[i]
+
+    hash_table.storage = new_storage
+    hash_table.capacity = new_capacity
 
 
 def Testing():
