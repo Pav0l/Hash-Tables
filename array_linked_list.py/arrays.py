@@ -83,10 +83,26 @@ def array_remove(arr, element):
 
 # Remove the element in a given position and return it
 # Then shift every element after that occurrance to fill the gap
-def array_pop():
-    # Throw an error if array is out of the current count
-    # Your code here
-    pass
+# Throw an error if array is out of the current count
+def array_pop(arr, idx):
+    if idx > arr.count:
+        print(f'IndexError: Index {idx} is out of range.')
+        return None
+
+    # save the return value
+    return_val = arr.storage[idx]
+
+    # shift elements
+    # start at idx + 1 until the end of array (arr.count)
+    for i in range(idx + 1, arr.count, 1):
+        arr.storage[i - 1] = arr.storage[i]
+
+    # decrese the count of elements
+    arr.count -= 1
+    # set the element in elements array to None
+    arr.storage[arr.count] = None
+
+    return return_val
 
 
 # Utility to print an array
