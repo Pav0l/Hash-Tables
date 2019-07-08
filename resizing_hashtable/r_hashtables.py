@@ -14,7 +14,7 @@ class HashTable:
 
 
 # Research and implement the djb2 hash function
-def hash(string, max):
+def hash(string):
     prime = 5381
     for c in string:
         prime = (prime * 33) + ord(c)
