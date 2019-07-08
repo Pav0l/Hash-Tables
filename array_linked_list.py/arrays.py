@@ -13,9 +13,19 @@ class array:
 # Double the size of the given array
 
 
-def resize_array():
-    # Your code here
-    pass
+def resize_array(arr):
+    # the caller will send current arr capacity
+    # then we set new capacity to double
+    new_capacity = arr.capacity * 2
+    # create new data structure to hold the elements of resized array
+    new_elements = [None] * new_capacity
+    # copy elements from old arr to new array
+    for i in range(arr.count):
+        new_elements[i] = arr.storage[i]
+
+    # set the new elements and capacity to the current array instance
+    arr.storage = new_elements
+    arr.capacity = new_capacity
 
 
 # Return an element of a given array at a given index
