@@ -36,9 +36,12 @@ def hash_table_insert(hash_table, key, value):
 
     # collision
     if hash_table.storage[arr_idx]:
-        print(
-            f'Collision! Adding key:value pair "{key}: {value}" to the linked list')
-        hash_table.storage[arr_idx].next = LinkedPair(key, value)
+        # if they inserted key already exist, overwrite current value
+        if hash_table.storage[arr_idx].key == key:
+            hash_table.storage[arr_idx] = LinkedPair(key, value)
+        # otherwise link it to a LL at this index
+        else:
+            hash_table.storage[arr_idx].next = LinkedPair(key, value)
     # no collision
     else:
         hash_table.storage[arr_idx] = LinkedPair(key, value)
@@ -103,4 +106,14 @@ def Testing():
           + " to " + str(new_capacity) + ".")
 
 
-Testing()
+# Testing()
+
+ht = HashTable(8)
+
+hash_table_insert(ht, "key-0", "val-0")
+hash_table_insert(ht, "key-1", "val-1")
+hash_table_insert(ht, "key-2", "val-2")
+
+hash_table_insert(ht, "key-0", "new-val-0")
+hash_table_insert(ht, "key-1", "new-val-1")
+hash_table_insert(ht, "key-2", "new-val-2")
