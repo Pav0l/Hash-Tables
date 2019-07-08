@@ -38,10 +38,13 @@ def hash(string):
 
 # If you are overwriting a value with a different key, print a warning.
 # '''
-
-
 def hash_table_insert(hash_table, key, value):
-    pass
+    arr_idx = hash(key) % hash_table.capacity
+    if hash_table.storage[arr_idx]:
+        print(
+            f'WARNING: Overwriting existing key: value pair.')
+
+    hash_table.storage[arr_idx] = Pair(key, value)
 
 
 # '''
@@ -49,6 +52,8 @@ def hash_table_insert(hash_table, key, value):
 
 # If you try to remove a value that isn't there, print a warning.
 # '''
+
+
 def hash_table_remove(hash_table, key):
     pass
 
