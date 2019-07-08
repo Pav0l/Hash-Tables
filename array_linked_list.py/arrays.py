@@ -29,13 +29,16 @@ def resize_array(arr):
 
 
 # Return an element of a given array at a given index
-def array_read():
+def array_read(arr, idx):
     # Throw an error if array is out of the current count
-    # Your code here
-    pass
-
+    if idx >= arr.count:
+        print(f'IndexError: Index {idx} is out of range.')
+        return None
+    return arr.storage[idx]
 
 # Insert an element in a given array at a given index
+
+
 def array_insert():
     # Throw an error if array is out of the current count
 
