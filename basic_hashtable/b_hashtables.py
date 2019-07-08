@@ -27,10 +27,10 @@ class BasicHashTable:
 # '''
 def hash(string):
     # hash(i) = hash(i - 1) * 33 ^ str[i];
-    hash = 5381
+    prime = 5381
     for c in string:
-        hash = (hash * 33) + ord(c)
-    return hash
+        prime = (prime * 33) + ord(c)
+    return prime
 
 
 # '''
