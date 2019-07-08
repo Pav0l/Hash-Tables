@@ -21,6 +21,11 @@ def hash(string):
     return prime
 
 
+# abstract away function to return an Index for hashed key
+def get_idx(hash_table, key):
+    return hash(key) % hash_table.capacity
+
+
 # Hint: Used the LL to handle collisions
 def hash_table_insert(hash_table, key, value):
     pass
