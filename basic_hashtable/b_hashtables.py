@@ -36,7 +36,12 @@ def hash_table_insert(hash_table, key, value):
 
 # If you try to remove a value that isn't there, print a warning.
 def hash_table_remove(hash_table, key):
-    pass
+    arr_idx = hash(key) % hash_table.capacity
+    if not hash_table.storage[arr_idx]:
+        print(f'Hash Table does not contain this key:value pair')
+        return None
+    else:
+        hash_table.storage[arr_idx] = None
 
 
 # Should return None if the key is not found.
