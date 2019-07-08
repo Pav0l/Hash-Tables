@@ -32,7 +32,7 @@ def hash_table_insert(hash_table, key, value):
     arr_idx = get_idx(hash_table, key)
 
     if hash_table.load_factor >= 0.7:
-        hash_table_resize(hash_table)
+        hash_table = hash_table_resize(hash_table)
 
     # collision
     if hash_table.storage[arr_idx]:
@@ -65,6 +65,8 @@ def hash_table_resize(hash_table):
     hash_table.storage = new_storage
     hash_table.capacity = new_capacity
 
+    return hash_table
+
 
 def Testing():
     ht = HashTable(2)
@@ -73,8 +75,6 @@ def Testing():
     hash_table_insert(ht, "line_2", "Filled beyond capacity")
     hash_table_insert(ht, "line_3", "Linked list saves the day!")
 
-
-"""
     print(hash_table_retrieve(ht, "line_1"))
     print(hash_table_retrieve(ht, "line_2"))
     print(hash_table_retrieve(ht, "line_3"))
@@ -86,5 +86,5 @@ def Testing():
     print("Resized hash table from " + str(old_capacity)
           + " to " + str(new_capacity) + ".")
 
-"""
+
 Testing()
