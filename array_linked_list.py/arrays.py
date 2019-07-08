@@ -2,7 +2,7 @@
 
 # Do not use any of the built in array functions for this exercise
 class array:
-    def __init__(self):
+    def __init__(self, capacity):
         # capacity of the array => how many elements can fit inside it
         self.capacity = capacity
         # occupied length of the array => how many elements are actually in the array
@@ -109,7 +109,7 @@ def array_pop(arr, idx):
 def array_print(array):
     string = "["
     for i in range(array.count):
-        string += str(array.elements[i])
+        string += str(array.storage[i])
         if i < array.count - 1:
             string += ", "
 
@@ -117,15 +117,15 @@ def array_print(array):
     print(string)
 
 
-# # Testing
-# arr = array(1)
+# Testing
+arr = array(1)
 
-# array_insert(arr, "STRING1", 0)
-# array_print(arr)
-# array_pop(arr, 0)
-# array_print(arr)
-# array_insert(arr, "STRING1", 0)
-# array_append(arr, "STRING4")
-# array_insert(arr, "STRING2", 1)
-# array_insert(arr, "STRING3", 2)
-# array_print(arr)
+array_insert(arr, "STRING1", 0)
+array_print(arr)
+array_pop(arr, 0)
+array_print(arr)
+array_insert(arr, "STRING1", 0)
+array_append(arr, "STRING4")
+array_insert(arr, "STRING2", 1)
+array_insert(arr, "STRING3", 2)
+array_print(arr)
