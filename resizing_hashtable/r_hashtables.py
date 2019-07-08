@@ -26,9 +26,16 @@ def get_idx(hash_table, key):
     return hash(key) % hash_table.capacity
 
 
-# Hint: Used the LL to handle collisions
 def hash_table_insert(hash_table, key, value):
-    pass
+    arr_idx = get_idx(hash_table, key)
+    # collision
+    if hash_table.storage[arr_idx]:
+        print(
+            f'Collision! Adding key:value pair "{key}: {value}" to the linked list')
+        hash_table.storage[arr_idx].next = LinkedPair(key, value)
+    # no collision
+    else:
+        hash_table.storage[arr_idx] = LinkedPair(key, value)
 
 
 # If you try to remove a value that isn't there, print a warning.
@@ -52,6 +59,8 @@ def Testing():
     hash_table_insert(ht, "line_2", "Filled beyond capacity")
     hash_table_insert(ht, "line_3", "Linked list saves the day!")
 
+
+"""
     print(hash_table_retrieve(ht, "line_1"))
     print(hash_table_retrieve(ht, "line_2"))
     print(hash_table_retrieve(ht, "line_3"))
@@ -63,5 +72,5 @@ def Testing():
     print("Resized hash table from " + str(old_capacity)
           + " to " + str(new_capacity) + ".")
 
-
+"""
 Testing()
