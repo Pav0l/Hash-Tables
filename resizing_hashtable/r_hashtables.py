@@ -12,7 +12,7 @@ class HashTable:
         self.capacity = capacity
         self.storage = [None] * capacity
         self.count = 0
-        # self.load_factor = self.count / capacity
+        # self.load_factor = 0.7
 
 
 # Research and implement the djb2 hash function
@@ -29,7 +29,8 @@ def get_idx(hash_table, key):
 
 
 def hash_table_insert(hash_table, key, value):
-    # if hash_table.load_factor >= 0.7:
+    # load_factor = hash_table.count / hash_table.capacity
+    # if load_factor > hash_table.load_factor:
     #     hash_table = hash_table_resize(hash_table)
 
     arr_idx = get_idx(hash_table, key)
@@ -41,12 +42,14 @@ def hash_table_insert(hash_table, key, value):
             hash_table.storage[arr_idx] = LinkedPair(key, value)
         # otherwise link it to a LL at this index
         else:
-            hash_table.storage[arr_idx].next = LinkedPair(key, value)
+            temp = hash_table.storage[arr_idx]
+            while temp.next:
+                temp = temp.next
+            temp.next = LinkedPair(key, value)
     # no collision
     else:
         hash_table.storage[arr_idx] = LinkedPair(key, value)
         hash_table.count += 1
-        # hash_table.load_factor = hash_table.count / hash_table.capacity
 
 
 # If you try to remove a value that isn't there, print a warning.
@@ -104,14 +107,39 @@ def hash_table_resize(hash_table):
 
     hash_table.storage = new_storage
     hash_table.capacity = new_capacity
-    # hash_table.load_factor = hash_table.count / new_capacity
 
     return hash_table
 
 
 def Testing():
-    ht = HashTable(2)
+    ht = HashTable(8)
 
+    hash_table_insert(ht, "key-0", "val-0")
+    hash_table_insert(ht, "key-1", "val-1")
+    hash_table_insert(ht, "key-2", "val-2")
+    hash_table_insert(ht, "key-3", "val-3")
+    hash_table_insert(ht, "key-4", "val-4")
+    hash_table_insert(ht, "key-5", "val-5")
+    hash_table_insert(ht, "key-6", "val-6")
+    hash_table_insert(ht, "key-7", "val-7")
+    hash_table_insert(ht, "key-8", "val-8")
+    hash_table_insert(ht, "key-9", "val-9")
+
+    print(hash_table_retrieve(ht, "key-0"))
+    print(hash_table_retrieve(ht, "key-1"))
+    print(hash_table_retrieve(ht, "key-2"))
+    print(hash_table_retrieve(ht, "key-3"))
+    print(hash_table_retrieve(ht, "key-4"))
+    print(hash_table_retrieve(ht, "key-5"))
+    print(hash_table_retrieve(ht, "key-6"))
+    print(hash_table_retrieve(ht, "key-7"))
+    print(hash_table_retrieve(ht, "key-8"))
+    print(hash_table_retrieve(ht, "key-9"))
+
+
+Testing()
+
+"""
     hash_table_insert(ht, "line_1", "Tiny hash table")
     hash_table_insert(ht, "line_2", "Filled beyond capacity")
     hash_table_insert(ht, "line_3", "Linked list saves the day!")
@@ -126,6 +154,4 @@ def Testing():
 
     print("Resized hash table from " + str(old_capacity)
           + " to " + str(new_capacity) + ".")
-
-
-Testing()
+"""
