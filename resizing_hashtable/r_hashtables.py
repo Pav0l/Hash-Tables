@@ -9,7 +9,8 @@ class LinkedPair:
 # Resizing hash table
 class HashTable:
     def __init__(self, capacity):
-        self.capacity = capacity
+        self.default_capacity = capacity
+        self.capacity = self.default_capacity
         self.storage = [None] * capacity
         self.count = 0
         # self.load_factor = 0.7
@@ -25,7 +26,12 @@ def hash(string):
 
 # abstract away function to return an Index for hashed key
 def get_idx(hash_table, key):
-    return hash(key) % hash_table.capacity
+    # keep track of number of capacity increases
+    capacity_increase_counter = hash_table.capacity / hash_table.default_capacity
+    if capacity_increase_counter > 1:
+        capacity_increase_counter /= 2
+    # multiply the default capacity by number of increases
+    return hash(key) % int(hash_table.default_capacity * capacity_increase_counter)
 
 
 def hash_table_insert(hash_table, key, value):
@@ -125,19 +131,13 @@ def Testing():
     hash_table_insert(ht, "key-8", "val-8")
     hash_table_insert(ht, "key-9", "val-9")
 
-    print(hash_table_retrieve(ht, "key-0"))
-    print(hash_table_retrieve(ht, "key-1"))
-    print(hash_table_retrieve(ht, "key-2"))
-    print(hash_table_retrieve(ht, "key-3"))
-    print(hash_table_retrieve(ht, "key-4"))
-    print(hash_table_retrieve(ht, "key-5"))
-    print(hash_table_retrieve(ht, "key-6"))
-    print(hash_table_retrieve(ht, "key-7"))
-    print(hash_table_retrieve(ht, "key-8"))
+    ht = hash_table_resize(ht)
+
     print(hash_table_retrieve(ht, "key-9"))
 
 
 Testing()
+
 
 """
     hash_table_insert(ht, "line_1", "Tiny hash table")
